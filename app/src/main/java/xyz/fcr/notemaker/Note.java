@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 public class Note {
+    private String noteID;
     private String noteTitle;
     private String noteContent;
     private String notePreviewContent;
@@ -14,6 +16,7 @@ public class Note {
 
 
     public Note(String noteTitle, String noteContent){
+        this.noteID = UUID.randomUUID().toString();
         this.noteTitle = noteTitle;
         this.noteContent = noteContent;
         this.notePreviewContent = shortenContent(noteContent);

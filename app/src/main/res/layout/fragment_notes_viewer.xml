@@ -8,34 +8,24 @@
     android:background="@color/gray"
     tools:context=".fragments.NotesViewerFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_view">
+    <include
+        android:id="@+id/note1"
+        layout="@layout/note_preview" />
 
-        <TextView
-            android:id="@+id/titleTextPreview"
-            android:layout_width="100dp"
-            android:maxWidth="100dp"
-            app:layout_constraintHorizontal_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Title of Note"
-            android:textColor="@color/black"
-            android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/note2"
+        layout="@layout/note_preview" />
 
-        <TextView
-            android:id="@+id/noteTextPreview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text"
-            android:layout_marginStart="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/titleTextPreview"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/note3"
+        layout="@layout/note_preview" />
+
+    <include
+        android:id="@+id/note4"
+        layout="@layout/note_preview" />
+
+    <include
+        android:id="@+id/note5"
+        layout="@layout/note_preview" />
 
 </LinearLayout>

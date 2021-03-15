@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginTop="20dp"
         android:fillViewport="true">
@@ -23,5 +23,23 @@
             android:layout_weight="1"
             tools:layout="@layout/fragment_notes_viewer" />
     </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:fillViewport="true">
+
+        <fragment
+            android:id="@+id/fragment_note"
+            android:name="xyz.fcr.notemaker.fragments.NoteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_note" />
+    </androidx.core.widget.NestedScrollView>
+
 
 </LinearLayout>

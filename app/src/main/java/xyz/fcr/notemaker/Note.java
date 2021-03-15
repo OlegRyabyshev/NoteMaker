@@ -9,6 +9,7 @@ import java.util.UUID;
 public class Note {
     private String noteID;
     private String noteTitle;
+    private String notePreviewTitle;
     private String noteContent;
     private String notePreviewContent;
     private String noteDate;
@@ -18,14 +19,14 @@ public class Note {
     public Note(String noteTitle, String noteContent){
         this.noteID = UUID.randomUUID().toString();
         this.noteTitle = noteTitle;
+        this.notePreviewTitle = shortenContent(noteTitle, 30);
         this.noteContent = noteContent;
-        this.notePreviewContent = shortenContent(noteContent);
+        this.notePreviewContent = shortenContent(noteContent, 50);
         this.noteDate = dateUpdate();
         this.noteTime = timeUpdate();
     }
 
-    private String shortenContent(String noteContent) {
-        int sizeOfStringToReturn = 30;
+    private String shortenContent(String noteContent, int sizeOfStringToReturn) {
 
         if (noteContent == null){
             return "";
@@ -33,7 +34,7 @@ public class Note {
 
         if (noteContent.length() < 30) sizeOfStringToReturn = noteContent.length();
 
-        return noteContent.substring(0, sizeOfStringToReturn);
+        return noteContent.substring(0, sizeOfStringToReturn).concat("...");
     }
 
     private String dateUpdate() {
@@ -46,6 +47,10 @@ public class Note {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         Date date = new Date();
         return formatter.format(date);
+    }
+
+    public String getNoteID() {
+        return noteID;
     }
 
     public String getNoteTitle() {
@@ -66,6 +71,12 @@ public class Note {
 
     public String getNoteTime() {
         return noteTime;
+    }
+
+
+
+    public void setNoteID(String noteID) {
+        this.noteID = noteID;
     }
 
     public void setNoteTitle(String noteTitle) {

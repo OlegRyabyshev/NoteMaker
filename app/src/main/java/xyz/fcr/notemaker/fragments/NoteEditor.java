@@ -15,6 +15,8 @@ import xyz.fcr.notemaker.R;
 
 public class NoteEditor extends Fragment {
 
+    private Note note;
+
     public NoteEditor() {
 
     }
@@ -26,24 +28,29 @@ public class NoteEditor extends Fragment {
 
         Bundle bundle = getArguments();
 
-        TextView title = myView.findViewById(R.id.note_editor_title);
-        TextView content = myView.findViewById(R.id.note_editor_content);
-
         if (bundle != null) {
-            Note note = (Note) bundle.getSerializable("note_id");
-
-            title.setText(note.getNoteTitle());
-            content.setText(note.getNoteContent());
+            note = (Note) bundle.getSerializable("note_id");
         } else {
-            title.setText(R.string.open_a_note);
-            content.setText("");
+            note = new Note(getString(R.string.open_a_note), "");
         }
 
+        displayNote(myView, note.getNoteTitle(), note.getNoteContent());
+
         return myView;
+    }
+
+    private void displayNote(View view, String noteTitle, String noteContent) {
+        TextView title = view.findViewById(R.id.note_editor_title);
+        TextView content = view.findViewById(R.id.note_editor_content);
+
+        title.setText(noteTitle);
+        content.setText(noteContent);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray"
-    tools:context=".fragments.NotesViewerFragment">
+    android:orientation="vertical"
+    tools:context=".fragments.NoteList">
 
     <include
         android:id="@+id/note1"
@@ -18,14 +18,6 @@
 
     <include
         android:id="@+id/note3"
-        layout="@layout/note_preview" />
-
-    <include
-        android:id="@+id/note4"
-        layout="@layout/note_preview" />
-
-    <include
-        android:id="@+id/note5"
         layout="@layout/note_preview" />
 
 </LinearLayout>

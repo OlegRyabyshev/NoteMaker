@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,13 +14,12 @@
         android:layout_marginTop="20dp"
         android:fillViewport="true">
 
-        <fragment
-            android:id="@layout/fragment_notes_viewer"
-            android:name="xyz.fcr.notemaker.fragments.NotesViewerFragment"
+        <FrameLayout
+            android:id="@+id/note_list_fragment"
+            android:name="xyz.fcr.notemaker.fragments.NoteList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            tools:layout="@layout/fragment_notes_viewer" />
+            tools:layout="@layout/note_list_fragment" />
     </androidx.core.widget.NestedScrollView>
 
 
@@ -30,15 +28,16 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:fillViewport="true">
 
-        <fragment
-            android:id="@+id/fragment_note"
-            android:name="xyz.fcr.notemaker.fragments.NoteFragment"
+        <FrameLayout
+            android:id="@+id/note_editor_fragment"
+            android:name="xyz.fcr.notemaker.fragments.NoteEditor"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            tools:layout="@layout/fragment_note" />
+            tools:layout="@layout/note_editor_fragment" />
     </androidx.core.widget.NestedScrollView>
 
 

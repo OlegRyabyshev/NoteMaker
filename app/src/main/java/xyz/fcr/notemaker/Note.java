@@ -2,11 +2,12 @@ package xyz.fcr.notemaker;
 
 import android.annotation.SuppressLint;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-public class Note {
+public class Note implements Serializable {
     private String noteID;
     private String noteTitle;
     private String notePreviewTitle;
@@ -21,18 +22,17 @@ public class Note {
         this.noteTitle = noteTitle;
         this.notePreviewTitle = shortenContent(noteTitle, 30);
         this.noteContent = noteContent;
-        this.notePreviewContent = shortenContent(noteContent, 50);
+        this.notePreviewContent = shortenContent(noteContent, 60);
         this.noteDate = dateUpdate();
         this.noteTime = timeUpdate();
     }
 
     private String shortenContent(String noteContent, int sizeOfStringToReturn) {
+        if (noteContent == null) return "";
 
-        if (noteContent == null){
-            return "";
+        if (noteContent.length() < 30) {
+            return noteContent;
         }
-
-        if (noteContent.length() < 30) sizeOfStringToReturn = noteContent.length();
 
         return noteContent.substring(0, sizeOfStringToReturn).concat("...");
     }
@@ -98,4 +98,5 @@ public class Note {
     public void setNoteTime(String noteTime) {
         this.noteTime = noteTime;
     }
+
 }

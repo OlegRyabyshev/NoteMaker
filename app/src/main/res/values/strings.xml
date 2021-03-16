@@ -1,6 +1,18 @@
 <resources>
-    <string name="app_name">Notes</string>
-    <string name="list_of_notes">List of Notes</string>
+    <string name="app_name">NoteMaker</string>
 
+    <string name="note_title_1">GitHub</string>
+    <string name="note_inside_1">The easiest way to introduce yourself on GitHub is by creating a README in a repository about you! You can start here</string>
 
+    <string name="note_title_2">Working with a team?</string>
+    <string name="note_inside_2">GitHub is built for collaboration. Set up an organization to improve the way your team works together, and get access to more features.</string>
+
+    <string name="note_title_3">Improved container support</string>
+    <string name="note_inside_3">You can more easily share containers in your organization, set granular access permissions, and anonymously access public container images. Additionally, layers are shared between images across GitHub.</string>
+
+    <string name="title_of_note">Title of Note</string>
+    <string name="open_a_note">Open a note</string>
+
+    <string name="title">Title</string>
+    <string name="content">Content</string>
 </resources>

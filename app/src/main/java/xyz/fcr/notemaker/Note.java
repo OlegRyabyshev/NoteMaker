@@ -15,8 +15,7 @@ public class Note implements Serializable {
     private String notePreviewContent;
     private String noteDate;
     private String noteTime;
-
-
+    
     public Note(String noteTitle, String noteContent){
         this.noteID = UUID.randomUUID().toString();
         this.noteTitle = noteTitle;

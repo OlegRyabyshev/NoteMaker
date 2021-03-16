@@ -1,6 +1,5 @@
 package xyz.fcr.notemaker.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import java.util.Objects;
 
 import xyz.fcr.notemaker.Note;
 import xyz.fcr.notemaker.R;
@@ -101,9 +97,9 @@ public class NoteList extends Fragment {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            transaction.replace(R.id.note_editor_fragment, fragment);
+            transaction.replace(R.id.note_editor_fragment, fragment, "EDITOR_FRAGMENT");
         } else {
-            transaction.replace(R.id.note_list_fragment, fragment);
+            transaction.replace(R.id.note_list_fragment, fragment, "EDITOR_FRAGMENT");
             transaction.addToBackStack("Back");
         }
 

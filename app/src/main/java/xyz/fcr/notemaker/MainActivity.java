@@ -1,16 +1,18 @@
 package xyz.fcr.notemaker;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import xyz.fcr.notemaker.fragments.NoteEditor;
 import xyz.fcr.notemaker.fragments.NoteList;
 
 public class MainActivity extends AppCompatActivity {
+
     private Note note;
 
     @Override
@@ -26,12 +28,11 @@ public class MainActivity extends AppCompatActivity {
             onlyEditor = true;
         }
 
-        final int orientation = getResources().getConfiguration().orientation;
-
-        if (onlyEditor && orientation == 1) startFragmentEditorInPortrait();
-        else {
+        if (onlyEditor && getResources().getConfiguration().orientation == 1) {
+            startFragmentEditorInPortrait();
+        } else {
             startFragmentList();
-            if (orientation == 2) startFragmentEditor();
+            if (getResources().getConfiguration().orientation == 2) startFragmentEditor();
         }
 
     }
@@ -70,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag("EDITOR_FRAGMENT");
 
-        if (fragment != null && fragment.isVisible() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (fragment != null
+                && fragment.isVisible()
+                && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             startFragmentList();
         } else {
             finish();

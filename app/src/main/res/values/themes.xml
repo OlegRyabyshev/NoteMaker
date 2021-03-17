@@ -13,16 +13,10 @@
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    
-    <style name="Theme.Note.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="android:background">@color/primary</item>
     </style>
 
-    <style name="Theme.Note.PopUpOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    <style name="Theme.ToolBar" parent="Theme.AppCompat.Light.DarkActionBar">
+
     </style>
 
 </resources>

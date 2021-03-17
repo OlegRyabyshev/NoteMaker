@@ -15,4 +15,5 @@
 
     <string name="title">Title</string>
     <string name="content">Content</string>
+    <string name="share_note">Share note</string>
 </resources>

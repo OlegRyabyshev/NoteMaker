@@ -24,9 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        Toolbar toolbar = findViewById(R.id.customToolbar);
-        toolbar.setPopupTheme(R.style.Theme_Note_PopUpOverlay);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         boolean onlyEditor = false;

@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import xyz.fcr.notemaker.Note;
+import xyz.fcr.notemaker.classes.Note;
 import xyz.fcr.notemaker.R;
 
 public class NoteList extends Fragment {

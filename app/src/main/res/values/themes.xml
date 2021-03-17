@@ -18,8 +18,11 @@
         <item name="windowNoTitle">true</item>
     </style>
     
-    <style name="Theme.Note.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="Theme.Note.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:background">@color/primary</item>
+    </style>
 
-    <style name="Theme.Note.PopUpOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+    <style name="Theme.Note.PopUpOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    </style>
 
 </resources>

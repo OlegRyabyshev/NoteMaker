@@ -9,14 +9,31 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        style="@style/Theme.Note.AppBarOverlay"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        style="@style/Theme.Note.AppBarOverlay" />
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/customToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="20dp"
+                android:textColor="@color/secondary"
+                android:layout_gravity="left"
+                android:id="@+id/toolbar_title" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:fillViewport="true">
 
@@ -24,8 +41,8 @@
             android:id="@+id/note_list_fragment"
             android:name="xyz.fcr.notemaker.fragments.NoteList"
             android:layout_width="match_parent"
-            tools:layout="@layout/note_list_fragment"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout="@layout/note_list_fragment" />
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

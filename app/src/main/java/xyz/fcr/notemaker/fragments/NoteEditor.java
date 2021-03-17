@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
-import xyz.fcr.notemaker.Note;
+import xyz.fcr.notemaker.classes.Note;
 import xyz.fcr.notemaker.R;
 
 public class NoteEditor extends Fragment {

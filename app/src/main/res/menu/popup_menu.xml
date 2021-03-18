@@ -3,21 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.GB_Android.MainActivity">
 
+<!--    <item-->
+<!--        android:id="@+id/action_info"-->
+<!--        android:icon="@drawable/ic_baseline_info"-->
+<!--        android:orderInCategory="3"-->
+<!--        android:title="About"-->
+<!--        app:showAsAction="ifRoom" />-->
+
     <item
-        android:id="@+id/option_one"
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_baseline_search"
         android:orderInCategory="1"
-        android:title="1"
-        app:showAsAction="never" />
+        android:title="Search"
+        android:iconTint="@color/secondary"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
 
     <item
-        android:id="@+id/option_two"
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_baseline_add"
         android:orderInCategory="2"
-        android:title="1"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/option_shareOutside"
-        android:orderInCategory="3"
-        android:title="@string/share_note"
-        app:showAsAction="never" />
+        android:title="Create a new note"
+        app:showAsAction="ifRoom" />
 </menu>

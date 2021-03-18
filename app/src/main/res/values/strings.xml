@@ -15,5 +15,8 @@
 
     <string name="title">Title</string>
     <string name="content">Content</string>
+
     <string name="share_note">Share note</string>
+    <string name="date">01/01/2020</string>
+    <string name="time">00:00</string>
 </resources>

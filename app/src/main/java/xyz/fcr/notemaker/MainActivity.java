@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Note note;
     private Toolbar toolbar;
+    private Toolbar sidebar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

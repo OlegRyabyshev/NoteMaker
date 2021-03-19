@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context=".fragments.NoteList">
+    tools:context=".fragment_classes.NoteList">
 
     <include
         android:id="@+id/note1"

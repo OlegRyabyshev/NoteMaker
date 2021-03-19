@@ -1,6 +1,5 @@
-package xyz.fcr.notemaker.fragments;
+package xyz.fcr.notemaker.fragment_classes;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,18 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
-import xyz.fcr.notemaker.MainActivity;
-import xyz.fcr.notemaker.classes.Note;
+import xyz.fcr.notemaker.object_classes.Note;
 import xyz.fcr.notemaker.R;
 
 public class NoteEditor extends Fragment {
@@ -39,17 +34,14 @@ public class NoteEditor extends Fragment {
         ImageButton button_copy = view.findViewById(R.id.button_copy);
         ImageButton button_save = view.findViewById(R.id.button_save);
 
-        button_share.setOnClickListener((v) ->{
-            Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show();
-        });
+        button_share.setOnClickListener((v) ->
+                Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show());
 
-        button_copy.setOnClickListener((v) ->{
-            Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show();
-        });
+        button_copy.setOnClickListener((v) ->
+                Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show());
 
-        button_save.setOnClickListener((v) ->{
-            Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show();
-        });
+        button_save.setOnClickListener((v) ->
+                Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show());
 
         Bundle bundle = getArguments();
         Note note;

@@ -19,7 +19,7 @@
         android:maxWidth="100dp"
         android:text="@string/title"
         android:textColor="@color/secondary"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:fontFamily="serif"
         android:text="@string/content"
         android:textColor="@color/secondary"
-        android:textSize="15dp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/noteTimePreview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titleTextPreview"
@@ -47,7 +47,7 @@
         android:layout_marginBottom="2dp"
         android:text="@string/date"
         android:textColor="@color/secondary"
-        android:textSize="10dp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -59,7 +59,7 @@
         android:layout_marginBottom="2dp"
         android:text="@string/time"
         android:textColor="@color/secondary"
-        android:textSize="10dp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/noteDatePreview" />
 

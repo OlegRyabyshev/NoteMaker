@@ -1,4 +1,4 @@
-package xyz.fcr.notemaker.classes;
+package xyz.fcr.notemaker.object_classes;
 
 import android.annotation.SuppressLint;
 

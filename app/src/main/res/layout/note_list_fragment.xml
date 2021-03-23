@@ -8,16 +8,11 @@
     android:orientation="vertical"
     tools:context=".fragment_classes.NoteList">
 
-    <include
-        android:id="@+id/note1"
-        layout="@layout/note_preview" />
-
-    <include
-        android:id="@+id/note2"
-        layout="@layout/note_preview" />
-
-    <include
-        android:id="@+id/note3"
-        layout="@layout/note_preview" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/note_item"/>
 
 </LinearLayout>

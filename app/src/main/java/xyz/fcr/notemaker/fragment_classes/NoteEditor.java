@@ -19,8 +19,6 @@ import xyz.fcr.notemaker.R;
 
 public class NoteEditor extends Fragment {
 
-
-
     public NoteEditor() {
 
     }

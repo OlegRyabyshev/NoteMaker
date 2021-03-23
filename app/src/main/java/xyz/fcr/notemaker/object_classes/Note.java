@@ -15,15 +15,15 @@ public class Note implements Serializable {
     private String notePreviewContent;
     private String noteDate;
     private String noteTime;
-    
-    public Note(String noteTitle, String noteContent){
+
+    public Note(String noteTitle, String noteContent) {
         this.noteID = UUID.randomUUID().toString();
         this.noteTitle = noteTitle;
         this.notePreviewTitle = shortenContent(noteTitle, 30);
         this.noteContent = noteContent;
         this.notePreviewContent = shortenContent(noteContent, 80);
-        this.noteDate = dateUpdate();
-        this.noteTime = timeUpdate();
+        this.noteDate = dateInitialSetter();
+        this.noteTime = timeInitialSetter();
     }
 
     private String shortenContent(String noteContent, int sizeOfStringToReturn) {
@@ -36,16 +36,30 @@ public class Note implements Serializable {
         return noteContent.substring(0, sizeOfStringToReturn).concat("...");
     }
 
-    private String dateUpdate() {
+    private String dateInitialSetter() {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         return formatter.format(date);
     }
 
-    private String timeUpdate() {
+    private String timeInitialSetter() {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         Date date = new Date();
         return formatter.format(date);
+    }
+
+    public void updateDateAndTimeOnSave(){
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+
+        Date date = new Date();
+
+        this.noteDate = dateFormatter.format(date);
+        this.noteTime = timeFormatter.format(date);
+    }
+
+    public String getNotePreviewTitle() {
+        return notePreviewTitle;
     }
 
     public String getNoteID() {
@@ -73,6 +87,10 @@ public class Note implements Serializable {
     }
 
 
+
+    public void setNotePreviewTitle(String notePreviewTitle) {
+        this.notePreviewTitle = notePreviewTitle;
+    }
 
     public void setNoteID(String noteID) {
         this.noteID = noteID;

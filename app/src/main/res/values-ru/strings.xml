@@ -6,8 +6,8 @@
     <string name="title_of_note">Заголовок заметки</string>
     <string name="open_a_note">Откройте заметку</string>
 
-    <string name="title">Заголовок</string>
-    <string name="content">Содержимое</string>
+    <string name="title">Заголовок заметки</string>
+    <string name="content">Введите содержимое заметки</string>
 
     <string name="share_note">Поделиться заметкой</string>
 

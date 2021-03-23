@@ -17,8 +17,8 @@
             set granular access permissions, and anonymously access public container images.
             Additionally, layers are shared between images across GitHub.</string>
 
-    <string name="title">Title</string>
-    <string name="content">Content</string>
+    <string name="title">Title of your note</string>
+    <string name="content">Enter your text here</string>
 
     <string name="share_note">Share note</string>
     <string name="date" translatable="false">01/01/2020</string>

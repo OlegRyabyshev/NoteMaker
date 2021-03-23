@@ -43,42 +43,63 @@
         android:textColor="@color/secondary"
         android:textSize="20sp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_save"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_baseline_save"
-            android:contentDescription="@string/save"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/ic_baseline_save"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
 
-        <ImageButton
-            android:id="@+id/button_copy"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/ic_baseline_copy"
-            android:contentDescription="@string/copy"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_save" />
-
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_share"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/ic_baseline_share"
-            android:contentDescription="@string/share"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_copy" />
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/ic_baseline_share"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_copy"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/ic_baseline_copy"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_delete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/ic_baseline_delete"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

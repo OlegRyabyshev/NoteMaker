@@ -12,40 +12,58 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import xyz.fcr.notemaker.object_classes.Note;
 import xyz.fcr.notemaker.R;
+import xyz.fcr.notemaker.object_classes.NoteAdapter;
 
 public class NoteList extends Fragment {
 
+    private ArrayList<Note> mNoteArrayList;
+
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    public NoteList(){
+    public NoteList() {
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        ArrayList<Note> noteArrayList = new ArrayList<>();
-        noteArrayList.add(new Note(getResources().getString(R.string.note_title_1), getResources().getString(R.string.note_inside_1)));
-        noteArrayList.add(new Note(getResources().getString(R.string.note_title_2), getResources().getString(R.string.note_inside_2)));
-        noteArrayList.add(new Note(getResources().getString(R.string.note_title_3), getResources().getString(R.string.note_inside_3)));
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        createNoteList();
         View myView = inflater.inflate(R.layout.note_list_fragment, container, false);
-
-
+        buildRecycleView(myView);
 
         return myView;
     }
 
-    private void replaceView(Note note){
+    private void createNoteList() {
+        mNoteArrayList = new ArrayList<>();
+        mNoteArrayList.add(new Note(getResources().getString(R.string.note_title_1), getResources().getString(R.string.note_inside_1)));
+        mNoteArrayList.add(new Note(getResources().getString(R.string.note_title_2), getResources().getString(R.string.note_inside_2)));
+        mNoteArrayList.add(new Note(getResources().getString(R.string.note_title_3), getResources().getString(R.string.note_inside_3)));
+    }
+
+    private void buildRecycleView(View myView) {
+        mRecyclerView = myView.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(myView.getContext());
+        mAdapter = new NoteAdapter(mNoteArrayList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(position -> {
+            
+        });
+    }
+
+    private void replaceView(Note note) {
         NoteEditor fragment = new NoteEditor();
 
         Bundle bundle = new Bundle();
@@ -54,7 +72,7 @@ public class NoteList extends Fragment {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             transaction.replace(R.id.note_editor_fragment, fragment, "EDITOR_FRAGMENT");
         } else {
             transaction.replace(R.id.note_list_fragment, fragment, "EDITOR_FRAGMENT");

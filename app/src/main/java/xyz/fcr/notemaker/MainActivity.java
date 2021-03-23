@@ -53,13 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             onlyEditor = true;
         }
 
-        if (onlyEditor && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (onlyEditor && orientationIsPortrait()) {
             startFragmentEditorInPortrait();
         } else {
             startFragmentList();
-            if (getResources().getConfiguration().orientation == 2) {
-                startFragmentEditor();
-            }
+            if (getResources().getConfiguration().orientation == 2) startFragmentEditor();
         }
 
     }
@@ -92,22 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction transactionEditor = getSupportFragmentManager().beginTransaction();
         transactionEditor.replace(R.id.note_list_fragment, fragment, "EDITOR_FRAGMENT");
         transactionEditor.commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("EDITOR_FRAGMENT");
-
-
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (fragment != null
-                && fragment.isVisible()
-                && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            startFragmentList();
-        } else {
-            finish();
-        }
     }
 
     @Override
@@ -162,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                Toast.makeText(this, "1 In development", Toast.LENGTH_SHORT).show();
+                createANewNote();
                 return true;
             case R.id.action_notes:
                 Toast.makeText(this, "2 In development", Toast.LENGTH_SHORT).show();
@@ -173,8 +155,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
+    private void createANewNote() {
+        saveCurrentNote();
 
+        if (orientationIsPortrait()) {
+            startFragmentEditorInPortrait();
+        } else {
+            startFragmentList();
+            if (getResources().getConfiguration().orientation == 2) startFragmentEditor();
+        }
+    }
+
+    //TODO
+    private void saveCurrentNote() {
+    }
+
+
+    private boolean orientationIsPortrait() {
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("EDITOR_FRAGMENT");
+
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (fragment != null && fragment.isVisible() && orientationIsPortrait()) {
+            startFragmentList();
+        } else {
+            finish();
+        }
     }
 }

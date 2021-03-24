@@ -15,4 +15,9 @@
     <style name="Theme.ToolBar" parent="Theme.AppCompat.DayNight">
 
     </style>
+
+    <style name="NavigationView">
+        <item name="android:textColorSecondary">@color/secondary</item>
+        <item name="android:listDivider">@color/drawer_top</item>
+    </style>
 </resources>

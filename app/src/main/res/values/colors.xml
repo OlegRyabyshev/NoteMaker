@@ -4,4 +4,5 @@
     <color name="secondary">#000000</color>
     <color name="gray">#e8e8e8</color>
     <color name="drawer_gray">#e8e8e8</color>
+    <color name="drawer_top">#FFFFFF</color>
 </resources>

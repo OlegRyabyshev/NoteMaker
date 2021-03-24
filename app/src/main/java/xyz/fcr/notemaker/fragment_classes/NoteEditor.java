@@ -38,7 +38,9 @@ public class NoteEditor extends Fragment {
                 Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show());
 
         button_copy.setOnClickListener((v) ->
-                Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show());
+
+
+                Toast.makeText(getContext(), "Copied", Toast.LENGTH_SHORT).show());
 
         button_save.setOnClickListener((v) ->
                 Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show());

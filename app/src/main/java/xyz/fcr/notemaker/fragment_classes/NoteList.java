@@ -58,9 +58,7 @@ public class NoteList extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(position -> {
-            
-        });
+        mAdapter.setOnItemClickListener(position -> replaceView(mNoteArrayList.get(position)));
     }
 
     private void replaceView(Note note) {

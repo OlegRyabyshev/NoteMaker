@@ -74,4 +74,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public int getItemCount() {
         return mNoteList.size();
     }
+
+    public void updateData(ArrayList<Note> notes) {
+        notes.clear();
+        notes.addAll(notes);
+        notifyDataSetChanged();
+    }
 }

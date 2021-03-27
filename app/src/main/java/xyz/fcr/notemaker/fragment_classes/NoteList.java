@@ -23,10 +23,10 @@ import xyz.fcr.notemaker.object_classes.NoteAdapter;
 
 public class NoteList extends Fragment {
 
-    private ArrayList<Note> mNoteArrayList;
+    public static ArrayList<Note> mNoteArrayList;
 
     private RecyclerView mRecyclerView;
-    private NoteAdapter mAdapter;
+    public static NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public NoteList() {
@@ -34,19 +34,16 @@ public class NoteList extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        createNoteList();
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (mNoteArrayList == null) {
+            mNoteArrayList = new ArrayList<>();
+            mNoteArrayList.add(new Note("Welcome", "Your can edit this note"));
+        }
+
         View myView = inflater.inflate(R.layout.note_list_fragment, container, false);
         buildRecycleView(myView);
 
         return myView;
-    }
-
-    private void createNoteList() {
-        mNoteArrayList = new ArrayList<>();
-        mNoteArrayList.add(new Note(getResources().getString(R.string.note_title_1), getResources().getString(R.string.note_inside_1)));
-        mNoteArrayList.add(new Note(getResources().getString(R.string.note_title_2), getResources().getString(R.string.note_inside_2)));
-        mNoteArrayList.add(new Note(getResources().getString(R.string.note_title_3), getResources().getString(R.string.note_inside_3)));
     }
 
     private void buildRecycleView(View myView) {

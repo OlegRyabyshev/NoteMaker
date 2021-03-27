@@ -1,6 +1,7 @@
 package xyz.fcr.notemaker;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         Bundle data = getIntent().getExtras();
-        if (data != null) {
+        if (data != null && data.containsKey("note_id")) {
             note = (Note) data.getSerializable("note_id");
             onlyEditor = true;
         }
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startFragmentEditorInPortrait();
         } else {
             startFragmentList();
-            if (getResources().getConfiguration().orientation == 2) startFragmentEditor();
+            if (getResources().getConfiguration().orientation == 2 && note != null) startFragmentEditor();
         }
 
     }
@@ -131,8 +133,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Theme", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_about:
-                Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
-                break;
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -157,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void createANewNote() {
         saveCurrentNote();
+
+        note = new Note (getResources().getString(R.string.title), getResources().getString(R.string.content));
 
         if (orientationIsPortrait()) {
             startFragmentEditorInPortrait();

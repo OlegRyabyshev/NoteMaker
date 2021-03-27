@@ -4,19 +4,6 @@
     <string name="title_of_note">Title of Note</string>
     <string name="open_a_note">Open a note</string>
 
-    <string name="note_title_1">GitHub</string>
-    <string name="note_inside_1">The easiest way to introduce yourself on GitHub is by
-            creating a README in a repository about you! You can start here</string>
-
-    <string name="note_title_2">Working with a team?</string>
-    <string name="note_inside_2">GitHub is built for collaboration. Set up an organization
-            to improve the way your team works together, and get access to more features.</string>
-
-    <string name="note_title_3">Improved container support</string>
-    <string name="note_inside_3">You can more easily share containers in your organization,
-            set granular access permissions, and anonymously access public container images.
-            Additionally, layers are shared between images across GitHub.</string>
-
     <string name="title">Title of your note</string>
     <string name="content">Enter your text here</string>
 
@@ -34,4 +21,12 @@
     <string name="save">Save</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
+
+    <string name="action_about">About</string>
+    <string name="about_text_name" translatable="false">NoteMaker</string>
+    <string name="about_text_dev_name">By Oleg Ryabyshev</string>
+    <string name="about_text_telegram" translatable="false">Telegram: </string>
+    <string name="about_text_email" translatable="false">Email: oryabyshev@gmail.com</string>
+    <string name="about_text_version" translatable="false">Ver. 1.0.0</string>
+    <string name="return_button">Return</string>
 </resources>

@@ -29,7 +29,7 @@ public class Note implements Serializable {
     private String shortenContent(String noteContent, int sizeOfStringToReturn) {
         if (noteContent == null) return "";
 
-        if (noteContent.length() < 30) {
+        if (noteContent.length() < sizeOfStringToReturn) {
             return noteContent;
         }
 
@@ -48,7 +48,13 @@ public class Note implements Serializable {
         return formatter.format(date);
     }
 
-    public void updateDateAndTimeOnSave(){
+    public void update(String newTitle, String newContent){
+        noteTitle = newTitle;
+        noteContent = newContent;
+
+        notePreviewTitle = shortenContent(noteTitle, 30);
+        notePreviewContent = shortenContent(noteContent, 80);
+
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
 

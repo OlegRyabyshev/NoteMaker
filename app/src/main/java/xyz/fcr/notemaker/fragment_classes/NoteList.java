@@ -2,15 +2,11 @@ package xyz.fcr.notemaker.fragment_classes;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +35,6 @@ public class NoteList extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mNoteArrayList == null) {
             mNoteArrayList = new ArrayList<>();
-            mNoteArrayList.add(new Note(getString(R.string.welcome_title), getString(R.string.welcome_content)));
         }
 
         View myView = inflater.inflate(R.layout.note_list_fragment, container, false);

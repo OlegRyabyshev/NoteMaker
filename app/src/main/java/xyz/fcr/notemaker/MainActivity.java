@@ -23,8 +23,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Objects;
-
 import xyz.fcr.notemaker.fragment_classes.NoteEditor;
 import xyz.fcr.notemaker.fragment_classes.NoteList;
 import xyz.fcr.notemaker.object_classes.Note;
@@ -187,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         Fragment fragmentEditor = getSupportFragmentManager().findFragmentByTag("EDITOR_FRAGMENT");
-        Fragment fragmentList = getSupportFragmentManager().findFragmentByTag("LIST_FRAGMENT");
+        //Fragment fragmentList = getSupportFragmentManager().findFragmentByTag("LIST_FRAGMENT");
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -201,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //THEMES
     private void setThemeFromSharedPreferences() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("MyUserPref", Context.MODE_PRIVATE);
-        String savedTheme = sharedPreferences.getString("calculator_theme", "");
+        String savedTheme = sharedPreferences.getString("note_theme", "");
 
         if (savedTheme.equals("light")) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         else if (savedTheme.equals("dark")) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -224,10 +222,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         builder.setSingleChoiceItems(themes, themeInt, (dialog, which) -> {
             if (which == 0) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                editor.putString("calculator_theme", "light");
+                editor.putString("note_theme", "light");
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                editor.putString("calculator_theme", "dark");
+                editor.putString("note_theme", "dark");
             }
             editor.apply();
         });

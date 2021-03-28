@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Note implements Serializable {
-    private String noteID;
+    private final String noteID;
     private String noteTitle;
     private String notePreviewTitle;
     private String noteContent;
@@ -94,32 +94,32 @@ public class Note implements Serializable {
 
 
 
-    public void setNotePreviewTitle(String notePreviewTitle) {
-        this.notePreviewTitle = notePreviewTitle;
-    }
-
-    public void setNoteID(String noteID) {
-        this.noteID = noteID;
-    }
-
-    public void setNoteTitle(String noteTitle) {
-        this.noteTitle = noteTitle;
-    }
-
-    public void setNoteContent(String noteContent) {
-        this.noteContent = noteContent;
-    }
-
-    public void setNotePreviewContent(String notePreviewContent) {
-        this.notePreviewContent = notePreviewContent;
-    }
-
-    public void setNoteDate(String noteDate) {
-        this.noteDate = noteDate;
-    }
-
-    public void setNoteTime(String noteTime) {
-        this.noteTime = noteTime;
-    }
+//    public void setNotePreviewTitle(String notePreviewTitle) {
+//        this.notePreviewTitle = notePreviewTitle;
+//    }
+//
+//    public void setNoteID(String noteID) {
+//        this.noteID = noteID;
+//    }
+//
+//    public void setNoteTitle(String noteTitle) {
+//        this.noteTitle = noteTitle;
+//    }
+//
+//    public void setNoteContent(String noteContent) {
+//        this.noteContent = noteContent;
+//    }
+//
+//    public void setNotePreviewContent(String notePreviewContent) {
+//        this.notePreviewContent = notePreviewContent;
+//    }
+//
+//    public void setNoteDate(String noteDate) {
+//        this.noteDate = noteDate;
+//    }
+//
+//    public void setNoteTime(String noteTime) {
+//        this.noteTime = noteTime;
+//    }
 
 }

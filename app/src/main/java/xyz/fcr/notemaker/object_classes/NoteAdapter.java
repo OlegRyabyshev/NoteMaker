@@ -1,10 +1,14 @@
 package xyz.fcr.notemaker.object_classes;
 
+import android.app.Activity;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,29 +18,27 @@ import java.util.ArrayList;
 
 import xyz.fcr.notemaker.R;
 
+import static xyz.fcr.notemaker.fragment_classes.NoteList.mAdapter;
+import static xyz.fcr.notemaker.fragment_classes.NoteList.mNoteArrayList;
+
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
     private ArrayList<Note> mNoteList;
     private final Fragment fragment;
-
     private OnItemClickListener mListenerClick;
-//    private OnItemLongClickListener mListenerLongClick;
+
+    public NoteAdapter(ArrayList<Note> noteList, Fragment fragment) {
+        mNoteList = noteList;
+        this.fragment = fragment;
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-//    public interface OnItemLongClickListener {
-//        boolean onItemLongClicked(int position);
-//    }
-
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListenerClick = listener;
     }
-
-//    public void setOnItemLongClick(OnItemLongClickListener listenerLong) {
-//        mListenerLongClick = listenerLong;
-//    }
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         public TextView mTitleNote;
@@ -63,26 +65,33 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 }
             });
 
-//            itemView.setOnLongClickListener(v -> {
-//                if (listenerLongClick != null) {
-//                    int position = getAdapterPosition();
-//                    if (position != RecyclerView.NO_POSITION){
-//                        listenerLongClick.onItemLongClicked(position);
-//                    }
-//                }
-//                return true;
-//            });
+            itemView.setOnCreateContextMenuListener(this);
         }
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
+            MenuItem delete = menu.add(Menu.NONE,1,1,"Delete");
+            delete.setOnMenuItemClickListener(onChange);
         }
-    }
 
-    public NoteAdapter(ArrayList<Note> noteList, Fragment fragment) {
-        mNoteList = noteList;
-        this.fragment = fragment;
+        private final MenuItem.OnMenuItemClickListener onChange = item -> {
+            if (item.getItemId() == 1) {
+                if (mNoteArrayList != null) {
+                    Note currentNote = mNoteArrayList.get(getAdapterPosition());
+
+                    for (int i = 0; i < mNoteArrayList.size(); i++) {
+                        if (currentNote.getNoteID().equals(mNoteArrayList.get(i).getNoteID())) {
+                            mNoteArrayList.remove(i);
+                            mAdapter.notifyItemRemoved(getAdapterPosition());
+                            break;
+                        }
+                    }
+
+                }
+                return true;
+            }
+            return false;
+        };
     }
 
     @NonNull

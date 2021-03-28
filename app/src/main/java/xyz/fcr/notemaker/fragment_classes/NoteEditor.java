@@ -4,12 +4,9 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -57,11 +52,12 @@ public class NoteEditor extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                saveData(note);
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                saveData(note);
             }
         });
 
@@ -72,11 +68,11 @@ public class NoteEditor extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                saveData(note);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                saveData(note);
             }
         });
 
@@ -156,6 +152,8 @@ public class NoteEditor extends Fragment {
     }
 
     private void saveData(Note note) {
+        if (note == null) return;
+
         boolean noteAlreadyInsideArray = false;
 
         for (int i = 0; i < mNoteArrayList.size(); i++) {

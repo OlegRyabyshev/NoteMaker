@@ -1,7 +1,9 @@
 package xyz.fcr.notemaker;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,7 +11,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -18,6 +22,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Objects;
 
 import xyz.fcr.notemaker.fragment_classes.NoteEditor;
 import xyz.fcr.notemaker.fragment_classes.NoteList;
@@ -34,8 +40,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
+        setThemeFromSharedPreferences();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -126,11 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_notes:
                 Toast.makeText(this, "Notes", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.action_trash:
-                Toast.makeText(this, "Trash", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.action_theme:
-                Toast.makeText(this, "Theme", Toast.LENGTH_SHORT).show();
+                showOptionsDialog();
                 break;
             case R.id.action_about:
                 Intent intent = new Intent(this, AboutActivity.class);
@@ -182,14 +186,66 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("EDITOR_FRAGMENT");
+        Fragment fragmentEditor = getSupportFragmentManager().findFragmentByTag("EDITOR_FRAGMENT");
+        Fragment fragmentList = getSupportFragmentManager().findFragmentByTag("LIST_FRAGMENT");
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else if (fragment != null && fragment.isVisible() && orientationIsPortrait()) {
+        } else if (fragmentEditor != null && fragmentEditor.isVisible() && orientationIsPortrait()) {
             startFragmentList();
         } else {
             finish();
+        }
+    }
+
+    //THEMES
+    private void setThemeFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("MyUserPref", Context.MODE_PRIVATE);
+        String savedTheme = sharedPreferences.getString("calculator_theme", "");
+
+        if (savedTheme.equals("light")) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        else if (savedTheme.equals("dark")) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
+
+    //THEMES
+    private void showOptionsDialog() {
+        final String[] themes = {
+                getResources().getString(R.string.action_theme_light),
+                getResources().getString(R.string.action_theme_dark)
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(getResources().getString(R.string.action_theme));
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyUserPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int themeInt = getCurrentTheme();
+
+        builder.setSingleChoiceItems(themes, themeInt, (dialog, which) -> {
+            if (which == 0) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                editor.putString("calculator_theme", "light");
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor.putString("calculator_theme", "dark");
+            }
+            editor.apply();
+        });
+
+        builder.show();
+    }
+
+    //THEMES
+    private int getCurrentTheme() {
+        int currentNightMode = getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                return 0;
+            case Configuration.UI_MODE_NIGHT_YES:
+                return 1;
+            default:
+                return -1;
         }
     }
 }

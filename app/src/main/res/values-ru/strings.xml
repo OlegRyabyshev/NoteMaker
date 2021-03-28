@@ -15,10 +15,12 @@
     <string name="navigation_drawer_close">Закрыть боковое меню</string>
     <string name="user_avatar">Изображение пользователя</string>
 
-    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
     <string name="copy">Скопировать</string>
     <string name="share">Поделиться</string>
 
+    <string name="notes">Заметки</string>
+    <string name="action_theme">Выбрать тему</string>
     <string name="action_about">Про приложение</string>
     <string name="about_text_name" translatable="false">NoteMaker</string>
     <string name="about_text_dev_name">Автор: Oleg Ryabyshev</string>
@@ -26,4 +28,10 @@
     <string name="about_text_email" translatable="false">Email: oryabyshev@gmail.com</string>
     <string name="about_text_version" translatable="false">Ver. 1.0.0</string>
     <string name="return_button">Вернуться</string>
+
+    <string name="action_theme_light">Светлая</string>
+    <string name="action_theme_dark">Тёмная</string>
+
+    <string name="welcome_title">Добро пожаловать!</string>
+    <string name="welcome_content">Начните редактировать эту заметку</string>
 </resources>

@@ -3,9 +3,13 @@ package xyz.fcr.notemaker.fragment_classes;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -45,9 +50,38 @@ public class NoteEditor extends Fragment {
         title = view.findViewById(R.id.note_editor_title);
         content = view.findViewById(R.id.note_editor_content);
 
+        title.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                saveData(note);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                saveData(note);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         MaterialButton button_share = view.findViewById(R.id.button_share);
         MaterialButton button_copy = view.findViewById(R.id.button_copy);
-        MaterialButton button_save = view.findViewById(R.id.button_save);
         MaterialButton button_delete = view.findViewById(R.id.button_delete);
 
         button_share.setOnClickListener((v) ->
@@ -60,13 +94,6 @@ public class NoteEditor extends Fragment {
 
             Toast.makeText(getContext(), "Copied", Toast.LENGTH_SHORT).show();
         });
-
-
-        button_save.setOnClickListener((v) -> {
-            saveData(note);
-            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
-        });
-
 
         button_delete.setOnClickListener((v) -> {
             if (mNoteArrayList != null) {
@@ -97,7 +124,10 @@ public class NoteEditor extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+
         outState.putSerializable("note_id", note);
+        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
+        intent.putExtras(outState);
     }
 
     private String getTextFromNote() {
@@ -141,10 +171,5 @@ public class NoteEditor extends Fragment {
         }
 
         mAdapter.notifyDataSetChanged();
-
-//        Bundle data = new Bundle();
-//        data.putSerializable("note_id", note);
-//        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
-//        intent.putExtras(data);
     }
 }

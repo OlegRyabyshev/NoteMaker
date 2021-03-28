@@ -2,14 +2,15 @@ package xyz.fcr.notemaker.fragment_classes;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ public class NoteList extends Fragment {
     private RecyclerView mRecyclerView;
     public static NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Fragment fragment;
 
     public NoteList() {
 
@@ -37,7 +39,7 @@ public class NoteList extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mNoteArrayList == null) {
             mNoteArrayList = new ArrayList<>();
-            mNoteArrayList.add(new Note("Welcome", "Your can edit this note"));
+            mNoteArrayList.add(new Note(getString(R.string.welcome_title), getString(R.string.welcome_content)));
         }
 
         View myView = inflater.inflate(R.layout.note_list_fragment, container, false);
@@ -50,7 +52,7 @@ public class NoteList extends Fragment {
         mRecyclerView = myView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(myView.getContext());
-        mAdapter = new NoteAdapter(mNoteArrayList);
+        mAdapter = new NoteAdapter(mNoteArrayList, fragment);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -75,11 +77,5 @@ public class NoteList extends Fragment {
         }
 
         transaction.commit();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
     }
 }

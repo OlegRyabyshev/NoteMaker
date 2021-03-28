@@ -3,17 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="NoteMaker">
+    <item android:title="@string/app_name">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/action_notes"
                     android:icon="@drawable/ic_baseline_note"
-                    android:title="Notes" />
-                <item
-                    android:id="@+id/action_trash"
-                    android:icon="@drawable/ic_baseline_trash"
-                    android:title="Trash" />
+                    android:title="@string/notes" />
             </group>
         </menu>
     </item>
@@ -21,10 +17,10 @@
     <item
         android:id="@+id/action_theme"
         android:icon="@drawable/ic_baseline_theme"
-        android:title="Theme" />
+        android:title="@string/action_theme" />
     <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_baseline_info"
-        android:title="About" />
+        android:title="@string/action_about" />
 
 </menu>

@@ -18,10 +18,12 @@
     <string name="oleg_ryabyshev" translatable="false">Oleg Ryabyshev</string>
     <string name="email" translatable="false">oryabyshev@gmail.com</string>
 
-    <string name="save">Save</string>
+    <string name="delete">Delete</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
 
+    <string name="notes">Notes</string>
+    <string name="action_theme">Theme</string>
     <string name="action_about">About</string>
     <string name="about_text_name" translatable="false">NoteMaker</string>
     <string name="about_text_dev_name">By Oleg Ryabyshev</string>
@@ -29,4 +31,10 @@
     <string name="about_text_email" translatable="false">Email: oryabyshev@gmail.com</string>
     <string name="about_text_version" translatable="false">Ver. 1.0.0</string>
     <string name="return_button">Return</string>
+
+    <string name="action_theme_light">Light</string>
+    <string name="action_theme_dark">Dark</string>
+
+    <string name="welcome_title">Welcome</string>
+    <string name="welcome_content">Your can edit this note</string>
 </resources>

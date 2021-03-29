@@ -75,17 +75,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             ArrayList<Note> mNoteArrayList = SharedPrefHandler.getArrayFromPref(itemView.getContext());
 
             if (item.getItemId() == 1) {
-                if (mNoteArrayList.size() > 0) {
+                if (mNoteArrayList != null) {
                     Note currentNote = mNoteArrayList.get(getAdapterPosition());
 
                     for (int i = 0; i < mNoteArrayList.size(); i++) {
                         if (currentNote.getNoteID().equals(mNoteArrayList.get(i).getNoteID())) {
                             mNoteArrayList.remove(i);
                             mAdapter.notifyItemRemoved(getAdapterPosition());
-                            SharedPrefHandler.saveArrayInPref(itemView.getContext(), mNoteArrayList);
                             break;
                         }
                     }
+
                 }
                 return true;
             }

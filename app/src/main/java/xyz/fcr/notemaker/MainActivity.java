@@ -77,11 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void startFragmentEditor() {
-        Bundle safe = new Bundle();
-        if (note != null) safe.putSerializable("note_id", note);
+        if (note != null) SharedPrefHandler.setCurrentNote(this, note);
 
         NoteEditor fragment = new NoteEditor();
-        fragment.setArguments(safe);
 
         FragmentTransaction transactionEditor = getSupportFragmentManager().beginTransaction();
         transactionEditor.replace(R.id.note_editor_fragment, fragment, "EDITOR_FRAGMENT");
@@ -92,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (note != null) SharedPrefHandler.setCurrentNote(this, note);
 
         NoteEditor fragment = new NoteEditor();
+
         FragmentTransaction transactionEditor = getSupportFragmentManager().beginTransaction();
         transactionEditor.replace(R.id.note_list_fragment, fragment, "EDITOR_FRAGMENT");
         transactionEditor.commit();

@@ -26,7 +26,10 @@ import com.google.android.material.navigation.NavigationView;
 import xyz.fcr.notemaker.fragment_classes.NoteEditor;
 import xyz.fcr.notemaker.fragment_classes.NoteList;
 import xyz.fcr.notemaker.object_classes.Note;
+import xyz.fcr.notemaker.object_classes.NoteAdapter;
 import xyz.fcr.notemaker.object_classes.SharedPrefHandler;
+
+import static xyz.fcr.notemaker.fragment_classes.NoteList.mAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -54,17 +57,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        Bundle data = getIntent().getExtras();
-        if (data != null && data.containsKey("note_id")) {
-            note = (Note) data.getSerializable("note_id");
-            onlyEditor = true;
-        }
+        note = SharedPrefHandler.getCurrentNote(this);
+        if (note != null) onlyEditor = true;
 
         if (onlyEditor && orientationIsPortrait()) {
             startFragmentEditorInPortrait();
         } else {
             startFragmentList();
-            if (getResources().getConfiguration().orientation == 2 && note != null) startFragmentEditor();
+            if (getResources().getConfiguration().orientation == 2 && note != null)
+                startFragmentEditor();
         }
 
     }
@@ -88,12 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void startFragmentEditorInPortrait() {
-        Bundle safe = new Bundle();
-        if (note != null) safe.putSerializable("note_id", note);
+        if (note != null) SharedPrefHandler.setCurrentNote(this, note);
 
         NoteEditor fragment = new NoteEditor();
-        fragment.setArguments(safe);
-
         FragmentTransaction transactionEditor = getSupportFragmentManager().beginTransaction();
         transactionEditor.replace(R.id.note_list_fragment, fragment, "EDITOR_FRAGMENT");
         transactionEditor.commit();
@@ -161,7 +159,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void createANewNote() {
-        note = new Note (getResources().getString(R.string.title), getResources().getString(R.string.content));
+        Note note = new Note(getResources().getString(R.string.title), getResources().getString(R.string.content));
+        SharedPrefHandler.setCurrentNote(this, note);
 
         if (orientationIsPortrait()) {
             startFragmentEditorInPortrait();
@@ -183,6 +182,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (fragmentEditor != null && fragmentEditor.isVisible() && orientationIsPortrait()) {
+            SharedPrefHandler.removeCurrentNote(this);
+            onlyEditor = false;
             startFragmentList();
         } else {
             finish();
@@ -229,5 +230,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 return -1;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPrefHandler.removeCurrentNote(this);
     }
 }

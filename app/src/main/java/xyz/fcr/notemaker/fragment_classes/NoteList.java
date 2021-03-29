@@ -1,5 +1,6 @@
 package xyz.fcr.notemaker.fragment_classes;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,8 +22,7 @@ import xyz.fcr.notemaker.object_classes.NoteAdapter;
 
 public class NoteList extends Fragment {
 
-    public static ArrayList<Note> mNoteArrayList;
-
+    private static ArrayList<Note> mNoteArrayList;
     private RecyclerView mRecyclerView;
     public static NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -56,11 +56,7 @@ public class NoteList extends Fragment {
 
     private void replaceView(Note note) {
         NoteEditor fragment = new NoteEditor();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("note_id", note);
-        fragment.setArguments(bundle);
-
+        SharedPrefHandler.setCurrentNote(getContext(), note);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {

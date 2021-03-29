@@ -1,6 +1,5 @@
 package xyz.fcr.notemaker.object_classes;
 
-import android.app.Activity;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import xyz.fcr.notemaker.R;
 
 import static xyz.fcr.notemaker.fragment_classes.NoteList.mAdapter;
-import static xyz.fcr.notemaker.fragment_classes.NoteList.mNoteArrayList;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
@@ -75,18 +72,20 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         }
 
         private final MenuItem.OnMenuItemClickListener onChange = item -> {
+            ArrayList<Note> mNoteArrayList = SharedPrefHandler.getArrayFromPref(itemView.getContext());
+
             if (item.getItemId() == 1) {
-                if (mNoteArrayList != null) {
+                if (mNoteArrayList.size() > 0) {
                     Note currentNote = mNoteArrayList.get(getAdapterPosition());
 
                     for (int i = 0; i < mNoteArrayList.size(); i++) {
                         if (currentNote.getNoteID().equals(mNoteArrayList.get(i).getNoteID())) {
                             mNoteArrayList.remove(i);
                             mAdapter.notifyItemRemoved(getAdapterPosition());
+                            SharedPrefHandler.saveArrayInPref(itemView.getContext(), mNoteArrayList);
                             break;
                         }
                     }
-
                 }
                 return true;
             }

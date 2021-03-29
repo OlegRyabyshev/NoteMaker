@@ -18,19 +18,21 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import xyz.fcr.notemaker.object_classes.Note;
 import xyz.fcr.notemaker.R;
+import xyz.fcr.notemaker.object_classes.SharedPrefHandler;
 
 import static xyz.fcr.notemaker.fragment_classes.NoteList.mAdapter;
-import static xyz.fcr.notemaker.fragment_classes.NoteList.mNoteArrayList;
 
 public class NoteEditor extends Fragment {
 
     private Note note;
     private TextView title;
     private TextView content;
+    private ArrayList<Note> mNoteArrayList;
 
     public NoteEditor() {
 
@@ -42,6 +44,8 @@ public class NoteEditor extends Fragment {
 
         View view = inflater.inflate(R.layout.note_editor_fragment, container, false);
 
+        mNoteArrayList = SharedPrefHandler.getArrayFromPref(getContext());
+
         title = view.findViewById(R.id.note_editor_title);
         content = view.findViewById(R.id.note_editor_content);
 
@@ -52,12 +56,12 @@ public class NoteEditor extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                saveData(note);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                saveData(note);
+
             }
         });
 
@@ -68,11 +72,12 @@ public class NoteEditor extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                saveData(note);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                saveData(note);
+
             }
         });
 
@@ -92,12 +97,11 @@ public class NoteEditor extends Fragment {
             ClipboardManager clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("CopiedText", getTextFromNote());
             clipboard.setPrimaryClip(clip);
-
             Toast.makeText(getContext(), getResources().getString(R.string.copied), Toast.LENGTH_SHORT).show();
         });
 
         button_delete.setOnClickListener((v) -> {
-            if (mNoteArrayList != null) {
+            if (mNoteArrayList.size() > 0) {
                 for (int i = 0; i < mNoteArrayList.size(); i++) {
                     if (note.getNoteID().equals(mNoteArrayList.get(i).getNoteID())) {
                         mNoteArrayList.remove(i);
@@ -105,30 +109,21 @@ public class NoteEditor extends Fragment {
                     }
                 }
             }
+
+            SharedPrefHandler.saveArrayInPref(getContext(), mNoteArrayList);
             Objects.requireNonNull(getActivity()).onBackPressed();
         });
 
+        note = SharedPrefHandler.getCurrentNote(getContext());
+        if (note != null) displayNote(note.getNoteTitle(), note.getNoteContent());
 
-        Bundle bundle = getArguments();
-
-        if (bundle != null) {
-            if (bundle.containsKey("note_id")) {
-                note = (Note) bundle.getSerializable("note_id");
-                displayNote(note.getNoteTitle(), note.getNoteContent());
-            } else {
-                displayNote(getResources().getString(R.string.title), getResources().getString(R.string.content));
-            }
-        }
         return view;
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        outState.putSerializable("note_id", note);
-        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
-        intent.putExtras(outState);
+        SharedPrefHandler.setCurrentNote(getContext(), note);
     }
 
     private String getTextFromNote() {
@@ -165,10 +160,12 @@ public class NoteEditor extends Fragment {
 
         boolean noteAlreadyInsideArray = false;
 
-        for (int i = 0; i < mNoteArrayList.size(); i++) {
-            if (note.getNoteID().equals(mNoteArrayList.get(i).getNoteID())) {
-                noteAlreadyInsideArray = true;
-                mNoteArrayList.get(i).update(title.getText().toString(), content.getText().toString());
+        if (!mNoteArrayList.isEmpty()) {
+            for (int i = 0; i < mNoteArrayList.size(); i++) {
+                if (note.getNoteID().equals(mNoteArrayList.get(i).getNoteID())) {
+                    noteAlreadyInsideArray = true;
+                    mNoteArrayList.get(i).update(title.getText().toString(), content.getText().toString());
+                }
             }
         }
 
@@ -178,5 +175,6 @@ public class NoteEditor extends Fragment {
         }
 
         mAdapter.notifyDataSetChanged();
+        SharedPrefHandler.saveArrayInPref(getContext(), mNoteArrayList);
     }
 }

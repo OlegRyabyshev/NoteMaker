@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import xyz.fcr.notemaker.R;
 
 public class SharedPrefHandler {
-    private static final String KEY_NOTE_LIST = "note_list";
-    private static final String KEY_NOTE_CURRENT = "note_current";
+    private static final String KEY_NOTE_LIST = "KEY_NOTE_LIST";
+    private static final String KEY_NOTE_CURRENT = "KEY_NOTE_CURRENT";
     private static final Gson gson = new Gson();
 
     //Getter and setter for NOTE_LIST
@@ -64,11 +64,21 @@ public class SharedPrefHandler {
 
         Note note = gson.fromJson(currentNote, Note.class);
 
-        if (note == null) note = new Note("Error", "Error");
+//        if (note == null) {
+//            note = new Note("Error", "Error");
+//        }
 
         return note;
     }
     //
+
+    public static void removeCurrentNote(Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(KEY_NOTE_CURRENT);
+        editor.apply();
+    }
+
 
     //Theme
     public static void setTheme(Context context) {

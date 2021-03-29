@@ -33,11 +33,9 @@
         android:layout_margin="10dp"
         android:layout_weight="1"
         android:autofillHints=""
-        android:background="@color/primary"
         android:gravity="top"
         android:hint="@string/content"
         android:inputType="textMultiLine"
-        android:paddingTop="0dp"
         android:textColor="@color/secondary"
         android:textSize="@dimen/content_size" />
 

@@ -80,15 +80,20 @@ public class NoteEditor extends Fragment {
         MaterialButton button_copy = view.findViewById(R.id.button_copy);
         MaterialButton button_delete = view.findViewById(R.id.button_delete);
 
-        button_share.setOnClickListener((v) ->
-                Toast.makeText(getContext(), "In development", Toast.LENGTH_SHORT).show());
+        button_share.setOnClickListener((v) -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, getTextFromNote());
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.share)));
+        });
+
 
         button_copy.setOnClickListener((v) -> {
             ClipboardManager clipboard = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("CopiedText", getTextFromNote());
             clipboard.setPrimaryClip(clip);
 
-            Toast.makeText(getContext(), "Copied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.copied), Toast.LENGTH_SHORT).show();
         });
 
         button_delete.setOnClickListener((v) -> {
@@ -138,14 +143,18 @@ public class NoteEditor extends Fragment {
     }
 
     private void displayNote(String noteTitle, String noteContent) {
-        if (title.getText().toString().equals(getResources().getString(R.string.title))) {
+        final int hintColor = getResources().getColor(R.color.secondary);
+
+        if (noteTitle.equals(getString(R.string.title))) {
             title.setHint(noteTitle);
+            title.setHintTextColor(hintColor);
         } else {
             title.setText(noteTitle);
         }
 
-        if (content.getText().toString().equals(getResources().getString(R.string.content))) {
+        if (noteContent.equals(getString(R.string.content))) {
             content.setHint(noteContent);
+            content.setHintTextColor(hintColor);
         } else {
             content.setText(noteContent);
         }

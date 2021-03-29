@@ -26,6 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 import xyz.fcr.notemaker.fragment_classes.NoteEditor;
 import xyz.fcr.notemaker.fragment_classes.NoteList;
 import xyz.fcr.notemaker.object_classes.Note;
+import xyz.fcr.notemaker.object_classes.SharedPrefHandler;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        setThemeFromSharedPreferences();
+        SharedPrefHandler.setTheme(this);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -161,8 +161,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void createANewNote() {
-        saveCurrentNote();
-
         note = new Note (getResources().getString(R.string.title), getResources().getString(R.string.content));
 
         if (orientationIsPortrait()) {
@@ -172,11 +170,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (getResources().getConfiguration().orientation == 2) startFragmentEditor();
         }
     }
-
-    //TODO
-    private void saveCurrentNote() {
-    }
-
 
     private boolean orientationIsPortrait() {
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
@@ -194,15 +187,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             finish();
         }
-    }
-
-    //THEMES
-    private void setThemeFromSharedPreferences() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("MyUserPref", Context.MODE_PRIVATE);
-        String savedTheme = sharedPreferences.getString("note_theme", "");
-
-        if (savedTheme.equals("light")) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        else if (savedTheme.equals("dark")) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     //THEMES

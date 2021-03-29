@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Заметки</string>
 
     <string name="title_of_note">Заголовок заметки</string>
@@ -17,6 +16,7 @@
 
     <string name="delete">Удалить</string>
     <string name="copy">Скопировать</string>
+    <string name="copied">Скопированно</string>
     <string name="share">Поделиться</string>
 
     <string name="notes">Заметки</string>

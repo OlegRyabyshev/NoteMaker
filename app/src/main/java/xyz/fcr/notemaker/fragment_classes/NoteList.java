@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import xyz.fcr.notemaker.object_classes.SharedPrefHandler;
 import xyz.fcr.notemaker.object_classes.Note;
 import xyz.fcr.notemaker.R;
 import xyz.fcr.notemaker.object_classes.NoteAdapter;
@@ -33,9 +34,7 @@ public class NoteList extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (mNoteArrayList == null) {
-            mNoteArrayList = new ArrayList<>();
-        }
+        mNoteArrayList = SharedPrefHandler.getArrayFromPref(getContext());
 
         View myView = inflater.inflate(R.layout.note_list_fragment, container, false);
         buildRecycleView(myView);

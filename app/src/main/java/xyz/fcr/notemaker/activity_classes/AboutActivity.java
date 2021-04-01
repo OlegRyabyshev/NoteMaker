@@ -1,4 +1,4 @@
-package xyz.fcr.notemaker;
+package xyz.fcr.notemaker.activity_classes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.text.util.Linkify;
 import android.widget.Button;
 import android.widget.TextView;
+
+import xyz.fcr.notemaker.MainActivity;
+import xyz.fcr.notemaker.R;
 
 public class AboutActivity extends AppCompatActivity {
 

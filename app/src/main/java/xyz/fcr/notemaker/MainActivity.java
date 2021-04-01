@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,28 +25,36 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import xyz.fcr.notemaker.activity_classes.AboutActivity;
+import xyz.fcr.notemaker.activity_classes.LoginActivity;
+import xyz.fcr.notemaker.activity_classes.RegisterActivity;
 import xyz.fcr.notemaker.fragment_classes.NoteEditor;
 import xyz.fcr.notemaker.fragment_classes.NoteList;
 import xyz.fcr.notemaker.object_classes.Note;
-import xyz.fcr.notemaker.object_classes.NoteAdapter;
 import xyz.fcr.notemaker.object_classes.SharedPrefHandler;
-
-import static xyz.fcr.notemaker.fragment_classes.NoteList.mAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawer;
+    public static Context context;
 
     private Note note;
     private boolean onlyEditor = false;
+    private TextView userEmail;
+    private FirebaseDatabase firebaseDB;
+    private DatabaseReference rootDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPrefHandler.setTheme(this);
+        MainActivity.context = getApplicationContext();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,6 +79,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startFragmentEditor();
         }
 
+        //If user is logged in: Welcome him, replace buttons
+        View header = navigationView.getHeaderView(0);
+        userEmail = (TextView) header.findViewById(R.id.user_email);
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            userEmail.setText(getString(R.string.welcome) + "\n"
+                    + FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+            navigationView.getMenu().findItem(R.id.action_register).setVisible(false);
+            navigationView.getMenu().findItem(R.id.action_log_in).setVisible(false);
+
+            navigationView.getMenu().findItem(R.id.action_get_from_firebase).setVisible(true);
+            navigationView.getMenu().findItem(R.id.action_save_to_firebase).setVisible(true);
+            navigationView.getMenu().findItem(R.id.action_logout).setVisible(true);
+        } else {
+            userEmail.setText(R.string.not_logged_in_yet);
+        }
     }
 
     private void startFragmentList() {
@@ -125,9 +153,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_notes:
-                Toast.makeText(this, "Notes", Toast.LENGTH_SHORT).show();
-                break;
+            case R.id.action_register:
+                Intent intentRegister = new Intent(this, RegisterActivity.class);
+                startActivity(intentRegister);
+                return true;
+            case R.id.action_log_in:
+                Intent intentLogin = new Intent(this, LoginActivity.class);
+                startActivity(intentLogin);
+                return true;
+            case R.id.action_get_from_firebase:
+                Toast.makeText(this, "Updated from Firebase", Toast.LENGTH_SHORT).show();
+                SharedPrefHandler.getNotesFromFirebaseDB(this);
+                recreate();
+                return true;
+            case R.id.action_save_to_firebase:
+                Toast.makeText(this, "Saved in Firebase", Toast.LENGTH_SHORT).show();
+                SharedPrefHandler.setFirebaseDB(this);
+                return true;
+            case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
+                recreate();
+                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+                return true;
             case R.id.action_theme:
                 showOptionsDialog();
                 break;
@@ -148,9 +195,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_add:
                 createANewNote();
                 return true;
-            case R.id.action_notes:
-                Toast.makeText(this, "2 In development", Toast.LENGTH_SHORT).show();
-                return true;
             default:
                 Toast.makeText(this, "Error in onOptionsItemSelected", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
@@ -158,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void createANewNote() {
-        Note note = new Note(getResources().getString(R.string.title), getResources().getString(R.string.content));
+        note = new Note(getResources().getString(R.string.title), getResources().getString(R.string.content));
         SharedPrefHandler.setCurrentNote(this, note);
 
         if (orientationIsPortrait()) {
@@ -176,7 +220,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         Fragment fragmentEditor = getSupportFragmentManager().findFragmentByTag("EDITOR_FRAGMENT");
-        //Fragment fragmentList = getSupportFragmentManager().findFragmentByTag("LIST_FRAGMENT");
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -229,11 +272,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 return -1;
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SharedPrefHandler.removeCurrentNote(this);
     }
 }

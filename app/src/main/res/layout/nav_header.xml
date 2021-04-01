@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="190dp"
     android:background="@color/drawer_top"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -12,22 +12,15 @@
         android:id="@+id/user_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
-        android:contentDescription="@string/user_avatar" />
-
-    <TextView
-        android:id="@+id/user_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="@string/oleg_ryabyshev"
-        android:textColor="@color/secondary"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:contentDescription="@string/user_avatar"
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/email"
         android:textColor="@color/secondary"
-        android:text="@string/email" />
+        android:visibility="visible" />
 </LinearLayout>

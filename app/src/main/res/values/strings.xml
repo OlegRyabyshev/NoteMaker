@@ -15,9 +15,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="user_avatar">User avatar</string>
 
-    <string name="oleg_ryabyshev" translatable="false">Oleg Ryabyshev</string>
-    <string name="email" translatable="false">oryabyshev@gmail.com</string>
-
     <string name="delete">Delete</string>
     <string name="copy">Copy</string>
     <string name="copied">Copied</string>
@@ -38,4 +35,16 @@
 
     <string name="welcome_title">Welcome</string>
     <string name="welcome_content">Your can edit this note</string>
+
+    <string name="register">Register</string>
+    <string name="log_in">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <string name="get_from_firebase">Download from cloud</string>
+    <string name="save_to_firebase">Save to cloud</string>
+    <string name="not_logged_in_yet">Log in</string>
+    <string name="welcome">Welcome, </string>
+    <string name="logout">Logout</string>
+
 </resources>

@@ -23,9 +23,8 @@ import java.util.Objects;
 
 import xyz.fcr.notemaker.object_classes.Note;
 import xyz.fcr.notemaker.R;
+import xyz.fcr.notemaker.object_classes.NoteAdapter;
 import xyz.fcr.notemaker.object_classes.SharedPrefHandler;
-
-import static xyz.fcr.notemaker.fragment_classes.NoteList.mAdapter;
 
 public class NoteEditor extends Fragment {
 
@@ -33,6 +32,8 @@ public class NoteEditor extends Fragment {
     private TextView title;
     private TextView content;
     private ArrayList<Note> mNoteArrayList;
+    public static NoteAdapter mAdapter;
+    private Fragment fragment;
 
     public NoteEditor() {
 
@@ -41,7 +42,6 @@ public class NoteEditor extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.note_editor_fragment, container, false);
 
         mNoteArrayList = SharedPrefHandler.getArrayFromPref(getContext());
@@ -56,12 +56,12 @@ public class NoteEditor extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                saveData(note);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                note.update(s.toString(), content.getText().toString());
+                saveData(note);
             }
         });
 
@@ -72,12 +72,12 @@ public class NoteEditor extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                saveData(note);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                note.update(title.getText().toString(), s.toString());
+                saveData(note);
             }
         });
 
@@ -123,7 +123,7 @@ public class NoteEditor extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        SharedPrefHandler.setCurrentNote(getContext(), note);
+        //SharedPrefHandler.setCurrentNote(getContext(), note);
     }
 
     private String getTextFromNote() {
@@ -159,7 +159,6 @@ public class NoteEditor extends Fragment {
         if (note == null) return;
 
         boolean noteAlreadyInsideArray = false;
-
         if (!mNoteArrayList.isEmpty()) {
             for (int i = 0; i < mNoteArrayList.size(); i++) {
                 if (note.getNoteID().equals(mNoteArrayList.get(i).getNoteID())) {
@@ -174,7 +173,8 @@ public class NoteEditor extends Fragment {
             mNoteArrayList.add(note);
         }
 
-        mAdapter.notifyDataSetChanged();
+        SharedPrefHandler.setCurrentNote(getContext(), note);
         SharedPrefHandler.saveArrayInPref(getContext(), mNoteArrayList);
+        NoteList.updateListView();
     }
 }

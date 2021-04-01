@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xyz.fcr.notemaker">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity"
+        <activity android:name=".activity_classes.RegisterActivity"
+            android:label="@string/register"/>
+        <activity android:name=".activity_classes.LoginActivity"
+            android:label="@string/log_in"/>
+        <activity android:name=".activity_classes.AboutActivity"
             android:label="@string/action_about"/>
     </application>
 

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import xyz.fcr.notemaker.MainActivity;
 import xyz.fcr.notemaker.object_classes.SharedPrefHandler;
 import xyz.fcr.notemaker.object_classes.Note;
 import xyz.fcr.notemaker.R;
@@ -26,7 +27,7 @@ public class NoteList extends Fragment {
     private RecyclerView mRecyclerView;
     public static NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Fragment fragment;
+    private static Fragment fragment;
 
     public NoteList() {
 
@@ -51,7 +52,10 @@ public class NoteList extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(position -> replaceView(mNoteArrayList.get(position)));
+        mAdapter.setOnItemClickListener(position -> {
+            replaceView(mNoteArrayList.get(position));
+            SharedPrefHandler.setCurrentNote(getContext(), mNoteArrayList.get(position));
+        });
     }
 
     private void replaceView(Note note) {
@@ -67,5 +71,11 @@ public class NoteList extends Fragment {
         }
 
         transaction.commit();
+    }
+
+    public static void updateListView() {
+        mNoteArrayList = SharedPrefHandler.getArrayFromPref(MainActivity.context);
+        if (mAdapter == null) mAdapter = new NoteAdapter(mNoteArrayList, fragment);
+        mAdapter.notifyDataSetChanged();
     }
 }

@@ -34,4 +34,15 @@
 
     <string name="welcome_title">Добро пожаловать!</string>
     <string name="welcome_content">Начните редактировать эту заметку</string>
+
+    <string name="register">Регистрация</string>
+    <string name="log_in">Войти</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+
+    <string name="get_from_firebase">Скачать с облака</string>
+    <string name="save_to_firebase">Сохранить на облако</string>
+    <string name="not_logged_in_yet">Войдите в аккаунт</string>
+    <string name="welcome">Добро пожаловать, </string>
+    <string name="logout">Выйти из аккаунта</string>
 </resources>

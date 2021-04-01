@@ -32,8 +32,6 @@ public class NoteEditor extends Fragment {
     private TextView title;
     private TextView content;
     private ArrayList<Note> mNoteArrayList;
-    public static NoteAdapter mAdapter;
-    private Fragment fragment;
 
     public NoteEditor() {
 
@@ -123,7 +121,6 @@ public class NoteEditor extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        //SharedPrefHandler.setCurrentNote(getContext(), note);
     }
 
     private String getTextFromNote() {

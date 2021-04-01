@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Note note;
     private boolean onlyEditor = false;
     private TextView userEmail;
-    private FirebaseDatabase firebaseDB;
-    private DatabaseReference rootDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

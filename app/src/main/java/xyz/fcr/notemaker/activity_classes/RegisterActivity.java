@@ -7,12 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -41,18 +37,18 @@ public class RegisterActivity extends AppCompatActivity {
             String email = mEmail.getText().toString().trim();
             String password = mPassword.getText().toString().trim();
 
-            if (TextUtils.isEmpty(email)){
+            if (TextUtils.isEmpty(email)) {
                 mEmail.setError("Email is required.");
                 return;
             }
 
-            if (TextUtils.isEmpty(password)){
+            if (TextUtils.isEmpty(password)) {
                 mPassword.setError("Password is required.");
                 return;
             }
 
-            firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-                if (task.isSuccessful()){
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
                     Toast.makeText(RegisterActivity.this, "User created", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {

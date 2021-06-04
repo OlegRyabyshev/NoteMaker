@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NoteMaker</string>
+
+    <string name="app_name">Заметки</string>
 
     <string name="note_title_1">GitHub</string>
     <string name="note_inside_1">The easiest way to introduce yourself on GitHub is by creating a README in a repository about you! You can start here</string>
@@ -11,8 +13,9 @@
     <string name="note_inside_3">You can more easily share containers in your organization, set granular access permissions, and anonymously access public container images. Additionally, layers are shared between images across GitHub.</string>
 
     <string name="title_of_note">Title of Note</string>
-    <string name="open_a_note">Open a note</string>
+    <string name="open_a_note">Откройте заметку</string>
 
-    <string name="title">Title</string>
-    <string name="content">Content</string>
+    <string name="title">Заголовок</string>
+    <string name="content">Содержимое</string>
+
 </resources>

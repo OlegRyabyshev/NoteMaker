@@ -1,4 +1,4 @@
-package xyz.fcr.notemaker;
+package xyz.fcr.notemaker.object_classes;
 
 import android.annotation.SuppressLint;
 
@@ -21,7 +21,7 @@ public class Note implements Serializable {
         this.noteTitle = noteTitle;
         this.notePreviewTitle = shortenContent(noteTitle, 30);
         this.noteContent = noteContent;
-        this.notePreviewContent = shortenContent(noteContent, 60);
+        this.notePreviewContent = shortenContent(noteContent, 80);
         this.noteDate = dateUpdate();
         this.noteTime = timeUpdate();
     }

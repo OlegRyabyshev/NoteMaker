@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="NoteMaker">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/action_notes"
+                    android:icon="@drawable/ic_baseline_note"
+                    android:title="Notes" />
+                <item
+                    android:id="@+id/action_trash"
+                    android:icon="@drawable/ic_baseline_trash"
+                    android:title="Trash" />
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_theme"
+        android:icon="@drawable/ic_baseline_theme"
+        android:title="Theme" />
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_baseline_info"
+        android:title="About" />
+
+</menu>

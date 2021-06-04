@@ -15,4 +15,19 @@
 
     <string name="title">Title</string>
     <string name="content">Content</string>
+
+    <string name="share_note">Share note</string>
+    <string name="date" translatable="false">01/01/2020</string>
+    <string name="time" translatable="false">00:00</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="user_avatar">User avatar</string>
+
+    <string name="oleg_ryabyshev" translatable="false">Oleg Ryabyshev</string>
+    <string name="email" translatable="false">oryabyshev@gmail.com</string>
+
+    <string name="save">Save</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
 </resources>

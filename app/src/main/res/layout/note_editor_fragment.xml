@@ -2,31 +2,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_editor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_editor"
-    tools:context=".fragments.NoteEditor"
-    android:layout_margin="15dp"
-    android:orientation="vertical">
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/rounded_view"
+    android:orientation="vertical"
+    tools:context=".fragment_classes.NoteEditor">
 
-    <TextView
+    <EditText
         android:id="@+id/note_editor_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:autofillHints=""
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center_horizontal"
-        android:textStyle="bold"
+        android:hint="@string/title"
+        android:inputType="textMultiLine"
+        android:textColor="@color/secondary"
         android:textSize="25sp"
-        android:text="@string/title" />
+        android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/note_editor_content"
         android:layout_width="match_parent"
-        android:gravity="top"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:textStyle="italic"
-        android:textSize="20sp"
-        android:text="@string/content" />
+        android:autofillHints=""
+        android:background="@color/primary"
+        android:fontFamily="serif"
+        android:gravity="top"
+        android:hint="@string/content"
+        android:inputType="textMultiLine"
+        android:paddingTop="0dp"
+        android:textColor="@color/secondary"
+        android:textSize="20sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_save"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_baseline_save"
+            android:contentDescription="@string/save"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageButton
+            android:id="@+id/button_copy"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/ic_baseline_copy"
+            android:contentDescription="@string/copy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_save" />
+
+        <ImageButton
+            android:id="@+id/button_share"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/ic_baseline_share"
+            android:contentDescription="@string/share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_copy" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

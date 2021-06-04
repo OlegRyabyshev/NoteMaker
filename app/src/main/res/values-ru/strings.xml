@@ -12,10 +12,19 @@
     <string name="note_title_3">Improved container support</string>
     <string name="note_inside_3">You can more easily share containers in your organization, set granular access permissions, and anonymously access public container images. Additionally, layers are shared between images across GitHub.</string>
 
-    <string name="title_of_note">Title of Note</string>
+    <string name="title_of_note">Заголовок заметки</string>
     <string name="open_a_note">Откройте заметку</string>
 
     <string name="title">Заголовок</string>
     <string name="content">Содержимое</string>
 
+    <string name="share_note">Поделиться заметкой</string>
+
+    <string name="navigation_drawer_open">Открыть боковое меню</string>
+    <string name="navigation_drawer_close">Закрыть боковое меню</string>
+    <string name="user_avatar">Изображение пользователя</string>
+
+    <string name="save">Сохранить</string>
+    <string name="copy">Скопировать</string>
+    <string name="share">Поделиться</string>
 </resources>

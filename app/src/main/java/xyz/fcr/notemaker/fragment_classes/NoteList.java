@@ -1,4 +1,4 @@
-package xyz.fcr.notemaker.fragments;
+package xyz.fcr.notemaker.fragment_classes;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import xyz.fcr.notemaker.Note;
+import xyz.fcr.notemaker.object_classes.Note;
 import xyz.fcr.notemaker.R;
 
 public class NoteList extends Fragment {
@@ -72,17 +72,9 @@ public class NoteList extends Fragment {
         dateNote3.setText(note3.getNoteDate());
         timeNote3.setText(note3.getNoteTime());
 
-        constraintLayout1.setOnClickListener((v) -> {
-            replaceView(note1);
-        });
-
-        constraintLayout2.setOnClickListener((v) -> {
-            replaceView(note2);
-        });
-
-        constraintLayout3.setOnClickListener((v) -> {
-            replaceView(note3);
-        });
+        constraintLayout1.setOnClickListener((v) -> replaceView(note1));
+        constraintLayout2.setOnClickListener((v) -> replaceView(note2));
+        constraintLayout3.setOnClickListener((v) -> replaceView(note3));
 
         return myView;
     }
